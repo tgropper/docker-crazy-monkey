@@ -30,7 +30,7 @@ echo "Running crazy-monkey with parameters: dead-time=$DEADTIME; sleep-time=$SLE
 while true
 do
   DEAD=$(docker ps -q | xargs shuf -n1 -e)
-  echo "Killing container $DEAD for $DEADTIME seconds"
+  echo "Killing container $DEAD"
   docker stop $DEAD
   sleep $DEADTIME
   docker start $DEAD
