@@ -25,15 +25,14 @@ case $i in
 esac
 done
 
-echo "Running crazy-monkey with parameters: dead-time=$DEADTIME; sleep-time=$SLEEPTIME"
+echo "Running crazy-monkey with parameters: dead-time=$DEADTIME; sleep-time=$SLEEPTIME."
 
 while true
 do
-  DEAD=$(docker ps --format '{{.ID}} {{.Names}}' | xargs shuf -n1 -e)
-  DEADID=$($DEAD | awk '{print $1}')
-  DEADNAME=$($DEAD | awk '{print $2}')
+  DEADID=$(docker ps -q | xargs shuf -n1 -e)
+  DEADNAME=$(docker ps --format '{{.ID}} {{.Names}}' | grep $DEADID | awk '{print $2}')
 
-  echo "Killing container $DEADNAME"
+  echo "Killing container $DEADNAME."
   docker stop $DEADID > /dev/null
   sleep $DEADTIME
   docker start $DEADID > /dev/null
