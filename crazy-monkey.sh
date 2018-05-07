@@ -36,11 +36,21 @@ kill () {
   DEADID=$(docker ps -q | xargs shuf -n1 -e)
   DEADNAME=$(docker ps --format '{{.ID}} {{.Names}}' | grep $DEADID | awk '{print $2}')
 
-  echo "Killing container $DEADNAME."
-  docker stop $DEADID > /dev/null
+  trap start $DEADID $DEADNAME INT
+
+  stop $DEADID $DEADNAME
   sleep $DEADTIME
-  docker start $DEADID > /dev/null
-  echo "Container $DEADNAME is back alive."
+  start $DEADID $DEADNAME
+}
+
+start () {
+  docker start $1 > /dev/null
+  echo "Container $2 is back alive."
+}
+
+stop () {
+  echo "Killing container $2."
+  docker stop $1 > /dev/null
 }
 
 while true
