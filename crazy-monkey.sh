@@ -30,8 +30,8 @@ echo "Running crazy-monkey with parameters: dead-time=$DEADTIME; sleep-time=$SLE
 while true
 do
   DEAD=$(docker ps --format '{{.ID}} {{.Names}}' | xargs shuf -n1 -e)
-  DEADID=$(DEAD | awk '{print $1}')
-  DEADNAME=$(DEAD | awk '{print $2}')
+  DEADID=$($DEAD | awk '{print $1}')
+  DEADNAME=$($DEAD | awk '{print $2}')
 
   echo "Killing container $DEADNAME"
   docker stop $DEADID > /dev/null
