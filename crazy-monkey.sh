@@ -45,7 +45,10 @@ kill () {
 
 while true
 do
-  for ((i=1; i<=$PARALLEL; i++)); do kill &; done
+  for ((i=1; i<=$PARALLEL; i++))
+  do 
+    kill &
+  done
   wait
   echo "Killed containers are back alive. Now it's safe to exit crazy-monkey."
   sleep $SLEEPTIME
