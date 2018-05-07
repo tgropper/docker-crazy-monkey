@@ -31,8 +31,8 @@ while true
 do
   DEAD=$(docker ps -q | xargs shuf -n1 -e)
   echo "Killing container $DEAD"
-  docker stop $DEAD
+  docker stop $DEAD > /dev/null
   sleep $DEADTIME
-  docker start $DEAD
+  docker start $DEAD > /dev/null
   sleep $SLEEPTIME
 done
