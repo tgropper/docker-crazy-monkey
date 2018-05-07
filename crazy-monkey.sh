@@ -2,9 +2,12 @@
 
 USAGE='Usage: ./crazy-monkey.sh [OPTIONS]
 \n\nOptions:
-\n\t --dead-time \t Sets the time the dead container should remain stopped
-\n\t --sleep-time \t Sets the time between each kill
+\n\t --dead-time \t Sets the time the dead container should remain stopped (default 1)
+\n\t --sleep-time \t Sets the time between each kill (default 5)
 \n\nRuns a crazy-monkey that randomly kills a running docker container.'
+
+DEADTIME=1
+SLEEPTIME=5
 
 for i in "$@"
 do
@@ -22,21 +25,7 @@ case $i in
 esac
 done
 
-if [[ -z $DEADTIME ]];
-then
-  echo "crazy-monkey requires argument '--dead-time'."
-  echo "See './crazy-monkey.sh --help'."
-  echo -e $USAGE
-  exit 1
-fi
-
-if [[ -z $SLEEPTIME ]];
-then
-  echo "crazy-monkey requires argument '--sleep-time'."
-  echo "See './crazy-monkey.sh --help'."
-  echo -e $USAGE
-  exit 1
-fi
+echo "Running crazy-monkey with parameters: dead-time=$DEADTIME; sleep-time=$SLEEPTIME"
 
 while true
 do
