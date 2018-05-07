@@ -29,10 +29,14 @@ echo "Running crazy-monkey with parameters: dead-time=$DEADTIME; sleep-time=$SLE
 
 while true
 do
-  DEAD=$(docker ps -q | xargs shuf -n1 -e)
-  echo "Killing container $DEAD"
-  docker stop $DEAD > /dev/null
+  DEAD=$(docker ps --format '{{.ID}} {{.Names}}' | xargs shuf -n1 -e)
+  DEADID=$(DEAD | awk '{print $1}')
+  DEADNAME=$(DEAD | awk '{print $2}')
+
+  echo "Killing container $DEADNAME"
+  docker stop $DEADID > /dev/null
   sleep $DEADTIME
-  docker start $DEAD > /dev/null
+  docker start $DEADID > /dev/null
+  echo "Container $DEADNAME is back alive. Now it's safe to exit crazy-monkey."
   sleep $SLEEPTIME
 done
