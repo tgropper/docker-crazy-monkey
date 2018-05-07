@@ -30,7 +30,7 @@ case $i in
 esac
 done
 
-echo "Running crazy-monkey with parameters: dead-time=$DEADTIME; sleep-time=$SLEEPTIME."
+echo "Running crazy-monkey with parameters: dead-time=$DEADTIME; sleep-time=$SLEEPTIME; parallel=$PARALLEL."
 
 kill () {
   DEADID=$(docker ps -q | xargs shuf -n1 -e)
@@ -45,7 +45,8 @@ kill () {
 
 while true
 do
-  for ((i=1; i<=$PARALLEL; i++)); do; kill &; done; wait
+  for ((i=1; i<=$PARALLEL; i++)); do kill &; done
+  wait
   echo "Killed containers are back alive. Now it's safe to exit crazy-monkey."
   sleep $SLEEPTIME
 done
