@@ -10,6 +10,6 @@ Runs a `crazy-monkey` that randomly kills running docker containers.
 
 |ARGS|Description|Default|
 -----|-----------|-------|
-|`--dead-time`|Time in seconds the dead container should remain stopped|1|
-|`--sleep-time`|Time in seconds between each kill|5|
+|`--dead-time`|Time (in seconds) the dead container should remain stopped|1|
+|`--sleep-time`|Time (in seconds) between each kill|5|
 |`--parallel`|Number of parallel kill executions|3|
