@@ -4,8 +4,8 @@ USAGE='Usage: ./crazy-monkey.sh [OPTIONS]
 \n\nOptions:
 \n\t --dead-time \t Sets the time the dead container should remain stopped (default 1)
 \n\t --sleep-time \t Sets the time between each kill (default 5)
-\n\t --parallel \t Defines the number of parallel executions (default 3)
-\n\nRuns a crazy-monkey that randomly kills a running docker container.'
+\n\t --parallel \t Defines the number of parallel kill executions (default 3)
+\n\nRuns a crazy-monkey that randomly kills running docker containers.'
 
 DEADTIME=1
 SLEEPTIME=5
