@@ -36,7 +36,7 @@ kill () {
   DEADID=$(docker ps -q | xargs shuf -n1 -e)
   DEADNAME=$(docker ps --format '{{.ID}} {{.Names}}' | grep $DEADID | awk '{print $2}')
 
-  trap 'start $DEADID $DEADNAME' SIGINT
+  trap 'start $DEADID $DEADNAME; exit 1' INT
 
   stop $DEADID $DEADNAME
   sleep $DEADTIME
