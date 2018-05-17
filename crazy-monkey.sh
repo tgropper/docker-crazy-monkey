@@ -37,11 +37,8 @@ done
 
 echo "Running crazy-monkey with parameters: dead-time=$DEADTIME; sleep-time=$SLEEPTIME; parallel=$PARALLEL; regex=$REGEX."
 
-# CONTAINERS=$(docker ps -a --format '{{.Names}} {{.ID }}' | grep $REGEX)
-
 kill () {
-  # DEADID=$(docker ps -q | xargs shuf -n1 -e)
-  DEADID=$(docker ps -a --format '{{.Names}} {{.ID }}' | grep $REGEX | awk '{print $2}' | xargs shuf -n1 -e)
+  DEADID=$(docker ps -a --format '{{.Names}} {{.ID }}' | grep '$REGEX' | awk '{print $2}' | xargs shuf -n1 -e)
   DEADNAME=$(docker ps -a --format '{{.Names}} {{.ID }}' | grep $DEADID | awk '{print $1}')
 
   trap 'start $DEADID $DEADNAME; exit 1' INT
