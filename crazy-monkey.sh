@@ -65,6 +65,6 @@ do
     kill &
   done
   wait
-  echo "$(date -u +"%F %T") Killed containers are back alive."
+  echo -e "$(date -u +"%F %T") Killed containers are back alive.\n"
   sleep $SLEEPTIME
 done
