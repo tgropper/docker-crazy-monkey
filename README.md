@@ -2,6 +2,9 @@
 
 Runs a `crazy-monkey` that randomly kills running docker containers.
 
+![alt text](assets/crazy-monkey.jpg)
+
+
 ## Usage
 
 `./crazy-monkey.sh [OPTIONS]`
