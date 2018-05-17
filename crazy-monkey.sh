@@ -35,7 +35,7 @@ case $i in
 esac
 done
 
-echo "Running crazy-monkey with parameters: dead-time=$DEADTIME; sleep-time=$SLEEPTIME; parallel=$PARALLEL; regex=$REGEX."
+echo "$(date -u +"%F %T") Running crazy-monkey with parameters: dead-time=$DEADTIME; sleep-time=$SLEEPTIME; parallel=$PARALLEL; regex=$REGEX."
 
 kill () {
   DEADID=$(docker ps -a --format '{{.Names}} {{.ID }}' | grep -P $REGEX | awk '{print $2}' | xargs shuf -n1 -e)
@@ -50,11 +50,11 @@ kill () {
 
 start () {
   docker start $1 > /dev/null
-  echo "Container $2 is back alive."
+  echo "$(date -u +"%F %T") Container $2 is back alive."
 }
 
 stop () {
-  echo "Killing container $2."
+  echo "$(date -u +"%F %T") Killing container $2."
   docker stop $1 > /dev/null
 }
 
@@ -65,6 +65,6 @@ do
     kill &
   done
   wait
-  echo "Killed containers are back alive. Now it's safe to exit crazy-monkey."
+  echo "$(date -u +"%F %T") Killed containers are back alive."
   sleep $SLEEPTIME
 done
